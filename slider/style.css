@@ -1,0 +1,50 @@
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, acronym, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+.wrapper-slider{
+	height: 10em;
+	border: 1px solid #d8d8d8;
+	width: 60%;
+	margin: 0 auto;
+	padding: 0 0.5% 0 0; 
+	min-width: 750px;
+}
+
+.wrapper__slider {
+	height: 100%;
+	align-items: center;
+}
+
+.wrapper__slider, .wrapper__button {
+	display:flex; 
+	width: 100%;
+	overflow: hidden;
+	align-items: center;
+	transition:1s;
+}
+
+.wrapper__button {justify-content: center;}
+
+.__item {
+	transition:1s;
+	background:url('images/anime-mangaka-art-chibi-maneki-neko-thumb.png') no-repeat center center;
+	height:9em;
+	position: relative;
+	margin: 0 1% 0 1%;
+	min-width: 18%;
+	left:0;
+	border: 1px solid #ebebeb;
+}
+
+
+button {
+	border: 1px solid #d8d8d8;
+	opacity: 0.8;
+}
