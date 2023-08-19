@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>script list</title>
+
+<style>
+    /* Задаем параметры */
+    @keyframes leftRight {
+        from {transform: translateX(0);}
+        50%  {transform: translateX(35px);}
+        to {transform: translateX(0);}
+    }
+    /* Применяем анимацию к изображениям */
+    .classImg {animation: leftRight 2s ease-in-out infinite; transform: rotate(0deg);}
+    html { background:url("image/imageback.jpg") no-repeat;}
+    body {overflow: visible;}
+</style>
+</head>
+<body style="margin: 0;">
+<div id="content" style="display: block; overflow: hidden; height: 100%; position: absolute; width: 100%; z-index: 0;"></div>
+<script>
+    //доступ к элементу DOM -> div
+    var content = document.getElementById("content");
+    //доступ к элементам DOM -> img
+    var imgInWindow = document.getElementsByTagName("img");
+    //высота экрана
+    var full_screen_height = innerHeight;
+    //массив для хранения ссылок
+    var mass_content = [];
+    //массив с ссылками (картинки)
+    var mass_img = [
+        "image/list1.png",
+        "image/list2.png",
+        "image/list3.png",
+        "image/list4.png",
+        "image/list5.png",
+        "image/list6.png",
+        "image/list7.png",
+        "image/list8.png",
+        "image/list9.png",
+        "image/list10.png",
+        "image/list11.png",
+        "image/list12.png",
+        "image/list13.png",
+        "image/list8.png",
+        "image/list9.png",
+        "image/list10.png",
+        "image/list11.png",
+        "image/list12.png",
+        "image/list3.png",
+        "image/list4.png",
+        "image/list5.png",
+        "image/list6.png",
+        "image/list7.png",
+        "image/list8.png",
+        "image/list9.png",
+        "image/list10.png",
+        "image/list11.png",
+        "image/list12.png",
+        "image/list13.png",
+        "image/list8.png",
+        "image/list9.png",
+        "image/list10.png",
+        "image/list11.png",
+        "image/list12.png",
+        "image/list1.png",
+        "image/list2.png",
+        "image/list3.png",
+        "image/list4.png",
+        "image/list5.png",
+        "image/list6.png",
+        "image/list7.png",
+        "image/list8.png",
+        "image/list13.png"
+    ];
+    //функция создающая лепестки сакуры
+    function create_list() {
+        for (let i = 0; i < mass_img.length; i++) {
+            //создаю html элемент <img . . .
+            let list_img = document.createElement("IMG");
+            //присваиваю путь к картинке
+            list_img.src = mass_img[i];
+            //присваиваю id
+            list_img.id = i;
+            //задаю класс
+            list_img.className = "classImg";
+            //задаю плавность анимации
+            list_img.transition = '0.002s';
+            //отступ для каждого лепестка слева
+            list_img.style.left = 2.3*i + '%';
+            //Задаем абсолютную позицию
+            list_img.style.position = "absolute";
+            //отступ для каждого лепестка сверху
+            list_img.style.top = -(Math.random()*1000) + 'px';
+            //кидаю лист в массив
+            mass_content.push(list_img);
+            //кидаю лист в DOM
+            content.append(mass_content[i]);
+        }
+    }
+    
+    //функция перемещая листочки сакуры
+    function animation_top() {
+        if (parseFloat(mass_content[0].style.top) > full_screen_height*1.8) {
+            //удаляю лепестки сакуры
+            deleteIMG();
+            //создаю новые лепестки
+            create_list();
+        }
+        
+        for (let i = 0; i < mass_img.length; i++) {
+            //узнаю позицию лепестка по высоте
+            var posImg = parseFloat(getComputedStyle(imgInWindow[i]).top);
+            //узнаю позицию лепестка слева
+            var posImgLeft = parseFloat(getComputedStyle(imgInWindow[i]).left);
+            //изменяю позицию каждого лепестка по вертикали
+            mass_content[i].style.top = posImg + 3 + "px";
+        }
+
+    }
+
+    //функция удаляющая упавшие лепестки
+    function  deleteIMG (){
+        for (let i = 0; i < mass_img.length; i++)
+        //удаляем IMG
+        document.getElementById(i).outerHTML = "";
+        //Очищаем массив
+        mass_content = [];
+    }
+    //создаю лепестки сакуры
+    create_list();
+    //вызов функций с определенной периодичность (20 миллисекунд)
+    setInterval(function () {
+        //анимация падения лепестков
+        animation_top();
+    }, 20); 
+</script>
+</body>
+</html>
